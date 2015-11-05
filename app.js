@@ -1418,7 +1418,7 @@ var BetBoxButton = React.createClass({
 
           // Update user balance
           Dispatcher.sendAction('UPDATE_USER', {
-            balance: worldStore.state.user.balance + bet.profit
+            balance: worldStore.state.user.balance + 100*bet.profit
           });
         },
         error: function(xhr) {
