@@ -113,9 +113,9 @@ helpers.roleToLabelElement = function(role) {
     case 'ADMIN':
       return el.span({className: 'label label-danger'}, 'MP Staff');
     case 'MOD':
-      return el.span({className: 'label label-info'}, 'Modérateur');
+      return el.span({className: 'label label-info'}, 'Mod');
     case 'OWNER':
-      return el.span({className: 'label label-primary'}, 'Proprio');
+      return el.span({className: 'label label-primary'}, 'Owner');
     default:
       return '';
   }
@@ -890,8 +890,8 @@ var ChatBoxInput = React.createClass({
                 type: 'text',
                 value: this.state.text,
                 placeholder: worldStore.state.user ?
-                  'Click here and begin typing...' :
-                  'Login to chat',
+                  'Tapez votre message...' :
+                  'Identifiez vous pour parler',
                 onChange: this._onChange,
                 onKeyPress: this._onKeyPress,
                 onFocus: this._onFocus,
@@ -912,7 +912,7 @@ var ChatBoxInput = React.createClass({
                 this.state.text.trim().length === 0,
               onClick: this._onSend
             },
-            'Send'
+            'Envoyer'
           )
         )
       )
@@ -1044,14 +1044,14 @@ var ChatBox = React.createClass({
           className: 'text-right text-muted',
           style: { marginTop: '-15px' }
         },
-        'Users online: ' + Object.keys(chatStore.state.userList).length + ' ',
+        'Utilisateurs en ligne : ' + Object.keys(chatStore.state.userList).length + ' ',
         // Show/Hide userlist button
         el.button(
           {
             className: 'btn btn-default btn-xs',
             onClick: this._onUserListToggle
           },
-          chatStore.state.showUserList ? 'Hide' : 'Show'
+          chatStore.state.showUserList ? 'Cacher' : 'Montrer'
         )
       ),
       // Show userlist
@@ -1213,7 +1213,7 @@ var BetBoxMultiplier = React.createClass({
           {
             style: betStore.state.multiplier.error ? { color: 'red' } : {}
           },
-          'Multiplier:')
+          'Multiplicateur :')
       ),
       el.div(
         {className: 'input-group'},
@@ -1291,7 +1291,7 @@ var BetBoxWager = React.createClass({
         el.strong(
           // If wagerError, make the label red
           betStore.state.wager.error ? { style: {color: 'red'} } : null,
-          'Wager:')
+          'Mise :')
       ),
       el.input(
         {
@@ -1338,7 +1338,7 @@ var BetBoxWager = React.createClass({
               style: style3,
               onClick: this._onMaxWager
             },
-            'Max'
+            'MAX'
           )
         )
       )
@@ -1449,25 +1449,25 @@ var BetBoxButton = React.createClass({
       // If app is loading, then just disable button until state change
       innerNode = el.button(
         {type: 'button', disabled: true, className: 'btn btn-lg btn-block btn-default'},
-        'Loading...'
+        'Chargement...'
       );
     } else if (error) {
       // If there's a betbox error, then render button in error state
 
       var errorTranslations = {
-        'CANNOT_AFFORD_WAGER': 'You cannot afford wager',
-        'INVALID_WAGER': 'Invalid wager',
-        'INVALID_MULTIPLIER': 'Invalid multiplier',
-        'MULTIPLIER_TOO_PRECISE': 'Multiplier too precise',
-        'MULTIPLIER_TOO_HIGH': 'Multiplier too high',
-        'MULTIPLIER_TOO_LOW': 'Multiplier too low'
+        'CANNOT_AFFORD_WAGER': 'Vous ne pouvez pas payer',
+        'INVALID_WAGER': 'Mise invalide',
+        'INVALID_MULTIPLIER': 'Multiplicateur invalide',
+        'MULTIPLIER_TOO_PRECISE': 'Multiplicateur trop précis',
+        'MULTIPLIER_TOO_HIGH': 'Multiplicateur trop grand',
+        'MULTIPLIER_TOO_LOW': 'Multiplicateur trop petit'
       };
 
       innerNode = el.button(
         {type: 'button',
          disabled: true,
          className: 'btn btn-lg btn-block btn-danger'},
-        errorTranslations[error] || 'Invalid bet'
+        errorTranslations[error] || 'Pari invalide'
       );
     } else if (worldStore.state.user) {
       // If user is logged in, let them submit bet
@@ -1485,7 +1485,7 @@ var BetBoxButton = React.createClass({
                 onClick: this._makeBetHandler('>'),
                 disabled: !!this.state.waitingForServer
               },
-              'Bet Hi ', worldStore.state.hotkeysEnabled ? el.kbd(null, 'H') : ''
+              'Miser + ', worldStore.state.hotkeysEnabled ? el.kbd(null, 'H') : ''
             )
           ),
           // bet lo
@@ -1499,7 +1499,7 @@ var BetBoxButton = React.createClass({
                 onClick: this._makeBetHandler('<'),
                 disabled: !!this.state.waitingForServer
               },
-              'Bet Lo ', worldStore.state.hotkeysEnabled ? el.kbd(null, 'L') : ''
+              'Miser - ', worldStore.state.hotkeysEnabled ? el.kbd(null, 'L') : ''
             )
           )
         );
@@ -1512,7 +1512,7 @@ var BetBoxButton = React.createClass({
             '&redirect_uri=' + config.redirect_uri,
           className: 'btn btn-lg btn-block btn-success'
         },
-        'Login with MoneyPot'
+        'Identifiez vous sur money-pot'
       );
     }
 
@@ -1552,7 +1552,7 @@ var HotkeyToggle = React.createClass({
             onClick: this._onClick,
             style: { marginTop: '-15px' }
           },
-          'Hotkeys: ',
+          'Raccourcis : ',
           worldStore.state.hotkeysEnabled ?
             el.span({className: 'label label-success'}, 'ON') :
           el.span({className: 'label label-default'}, 'OFF')
@@ -1649,7 +1649,7 @@ var Tabs = React.createClass({
             href: 'javascript:void(0)',
             onClick: this._makeTabChangeHandler('ALL_BETS')
           },
-          'All Bets'
+          'Tous les paris'
         )
       ),
       // Only show MY BETS tab if user is logged in
@@ -1661,7 +1661,7 @@ var Tabs = React.createClass({
               href: 'javascript:void(0)',
               onClick: this._makeTabChangeHandler('MY_BETS')
             },
-            'My Bets'
+            'Mes paris'
           )
         ),
       // Display faucet tab even to guests so that they're aware that
@@ -1674,7 +1674,7 @@ var Tabs = React.createClass({
               href: 'javascript:void(0)',
               onClick: this._makeTabChangeHandler('FAUCET')
             },
-            el.span(null, 'Faucet ')
+            el.span(null, 'Bits gratuits')
           )
         )
     );
@@ -1702,11 +1702,11 @@ var MyBetsTabContent = React.createClass({
           el.tr(
             null,
             el.th(null, 'ID'),
-            el.th(null, 'Time'),
-            el.th(null, 'User'),
-            el.th(null, 'Wager'),
-            el.th(null, 'Target'),
-            el.th(null, 'Roll'),
+            el.th(null, 'Heure'),
+            el.th(null, 'Utilisateur'),
+            el.th(null, 'Mise'),
+            el.th(null, 'Estimation'),
+            el.th(null, 'Résultat'),
             el.th(null, 'Profit')
           )
         ),
@@ -1849,7 +1849,7 @@ var FaucetTabContent = React.createClass({
     if (!worldStore.state.user) {
       return el.p(
         {className: 'lead'},
-        'You must login to claim faucet'
+        'Vous devez vous identifier pour réclamer des bits'
       );
     }
 
@@ -1859,15 +1859,15 @@ var FaucetTabContent = React.createClass({
     case 'SHOW_RECAPTCHA':
       innerNode = el.div(
         { id: 'recaptcha-target' },
-        !!worldStore.state.grecaptcha ? '' : 'Loading...'
+        !!worldStore.state.grecaptcha ? '' : 'Chargement...'
       );
       break;
     case 'SUCCESSFULLY_CLAIMED':
       innerNode = el.div(
         null,
-        'Successfully claimed ' + this.state.claimAmount/100 + ' bits.' +
+        'Vous avez reçu ' + this.state.claimAmount/100 + ' bits !' +
           // TODO: What's the real interval?
-          ' You can claim again in 5 minutes.'
+          ' Vous pouvez réclamer dans 5 min.'
       );
       break;
     case 'ALREADY_CLAIMED':
@@ -2070,12 +2070,12 @@ var AllBetsTabContent = React.createClass({
           el.tr(
             null,
             el.th(null, 'ID'),
-            el.th(null, 'Time'),
-            el.th(null, 'User'),
-            el.th(null, 'Wager'),
-            el.th({className: 'text-right'}, 'Target'),
+            el.th(null, 'Heure'),
+            el.th(null, 'Utilisateur'),
+            el.th(null, 'Mise'),
+            el.th({className: 'text-right'}, 'Estimation'),
             // el.th(null, 'Roll'),
-            el.th(null, 'Outcome'),
+            el.th(null, 'Résultat'),
             el.th(
               {
                 style: {
@@ -2133,7 +2133,7 @@ var Footer = React.createClass({
           marginTop: '200px'
         }
       },
-      'Powered by ',
+      'Application gérée par ',
       el.a(
         {
           href: 'https://www.moneypot.com'
