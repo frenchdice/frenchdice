@@ -1379,7 +1379,7 @@ var BetBoxButton = React.createClass({
 
       var wagerSatoshis = betStore.state.wager.num * 100;
       var multiplier = betStore.state.multiplier.num;
-      var payoutSatoshis = wagerSatoshis * multiplier;
+      var payoutSatoshis = wagerSatoshis * multiplier * 100;
 
       var number = helpers.calcNumber(
         cond, helpers.multiplierToWinProb(multiplier)
