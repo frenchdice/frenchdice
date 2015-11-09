@@ -1512,7 +1512,7 @@ var BetBoxButton = React.createClass({
             '&redirect_uri=' + config.redirect_uri,
           className: 'btn btn-lg btn-block btn-success'
         },
-        'Identifiez vous sur money-pot'
+        'Identifiez vous sur Moneypot'
       );
     }
 
@@ -2133,12 +2133,7 @@ var Footer = React.createClass({
           marginTop: '200px'
         }
       },
-      'Application gérée par ',
-      el.a(
-        {
-          href: 'https://www.moneypot.com'
-        },
-        'Moneypot'
+      'French Dice 2015'
       )
     );
   }
